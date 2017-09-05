@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@{
+    ViewBag.Title = "Галерея";
+}
+<br />
+<br />
+<br />
+
+<ul class="products">
+    @{
+        int count = 0;
+        foreach (var a in Model)
+        {
+            foreach (var i in a.Photo)
+            {
+                if (i.Priority)
+                {
+                    var clas = "";
+                    if (count == 3)
+                    {
+                        clas = "product";
+                        count = 0;
+
+                    }
+                    else
+                    {
+                        count++;
+                        clas = "product child";
+                    }
+                    <li class="@clas">
+                        <img src="~/PhotoForDB/@i.PhotoUrl" class="productPic" title="@i.Product.Name" />
+                        <h3 class="productName">"@i.Product.Name"</h3>
+                    </li>
+                }
+            }
+
+        }
+    }
+</ul>

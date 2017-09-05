@@ -1,0 +1,180 @@
+﻿@using Domain.Entityes
+@model  IEnumerable<Reviews>
+@{
+    ViewBag.Title = "Отзывы";
+}
+<style>
+    #reviewStars-input input:checked ~ label, #reviewStars-input label, #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+        background: url('/Images/stars.png') no-repeat;
+    }
+
+    #reviewStars-input {
+        /*fix floating problems*/
+        overflow: hidden;
+        *zoom: 1;
+        /*end of fix floating problems*/
+        position: relative;
+        float: left;
+    }
+
+        #reviewStars-input input {
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+            opacity: 0;
+            width: 23px;
+            height: 21px;
+            position: absolute;
+            top: 0;
+            z-index: 0;
+        }
+
+            #reviewStars-input input:checked ~ label {
+                background-position: 0 -20px;
+                height: 21px;
+                width: 23px;
+            }
+
+        #reviewStars-input label {
+            background-position: 0 0;
+            height: 21px;
+            width: 23px;
+            float: right;
+            cursor: pointer;
+            margin-right: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+            #reviewStars-input label:hover, #reviewStars-input label:hover ~ label {
+                background-position: 0 -20px;
+                height: 21px;
+                width: 23px;
+            }
+
+        #reviewStars-input #star-0 {
+            left: 0;
+        }
+
+        #reviewStars-input #star-1 {
+            left: 33px;
+        }
+
+        #reviewStars-input #star-2 {
+            left: 66px;
+        }
+
+        #reviewStars-input #star-3 {
+            left: 99px;
+        }
+
+        #reviewStars-input #star-4 {
+            left: 132px;
+        }
+
+        #reviewStars-input #star-5 {
+            left: 165px;
+        }
+    /*----------------------------------------Ошибки валидации-------------------------------------*/
+    .field-validation-error {
+        color: #ff0000;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    .input-validation-error {
+        border: 1px solid #ff0000;
+        background-color: #fee;
+    }
+
+    .validation-summary-error {
+        font-weight: bold;
+        color: #ff0000;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+    /*----------------------------------------------------------------------------------*/
+</style>
+<br />
+<br />
+<br />
+@if (TempData["messageOk"] != null)
+{
+    <div align="center"><h3 style="color: green">@TempData["messageOk"]</h3></div>
+    <br />
+    <br />
+}
+@if (TempData["message"] != null)
+{
+    <div align="center"><h3 style="color: red">@TempData["message"]</h3></div>
+    <br />
+    <br />
+}
+@foreach (var item in Model)
+{ <div style="background-color: lightgray">
+
+        <h4>
+            @item.ClientName
+        </h4>
+        <h5>
+            @item.DateFeedback.ToString("dd.MM.yyyy")
+        </h5>
+        <h4>
+            @for (int a = 0; a < item.Rating; a++)
+            {
+                string title = "";
+                if (item.Rating.Equals(5))
+                {
+                    title = "Великолепно!";
+                }
+                if (item.Rating.Equals(4))
+                {
+                    title = "Хорошо";
+                }
+                if (item.Rating.Equals(3))
+                {
+                    title = "Средне";
+                }
+                if (item.Rating.Equals(2))
+                {
+                    title = "так себе";
+                }
+                if (item.Rating.Equals(1))
+                {
+                    title = "Плохо!";
+                }
+                <img title="@title" src="~/Images/star.png" />
+            }
+        </h4>
+
+
+        <h3 style="float: right">Отзыв</h3>
+        <br />
+        <br />
+        <h5 style="float: right"> @item.ClientFeedback</h5>
+        <br />
+        <br />
+        @if (item.Advantages != null)
+        {
+            <h3 style="float: right">Достоинства</h3>
+            <br />
+            <br />
+            <h5 style="float: right">@item.Advantages</h5>
+            <br />
+            <br />
+        }
+        @if (item.LackOf != null)
+        {
+            <h3 style="float: right">Недостатки</h3>
+            <br />
+            <br />
+            <h5 style="float: right">@item.LackOf</h5>
+            <br />
+        }
+    </div>
+    <br />
+    <br />
+}
+@Html.Partial("NewFeedback",new Reviews())
