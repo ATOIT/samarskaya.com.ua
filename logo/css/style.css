@@ -1,0 +1,14 @@
+.af{
+   background: url(../img/patern.png);
+    background: #475;
+    text-align: center;
+    margin-top: 10px;
+}
+.logo {
+    height: 84px;
+    padding: 9px;  
+}
+.logoname {
+   height: 84px;
+    padding: 10px;  
+}
