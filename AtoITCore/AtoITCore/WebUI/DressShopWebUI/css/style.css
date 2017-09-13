@@ -28,7 +28,7 @@ html {
     }
 .icon img{
     padding-left: 25px;
-    width: 50px;
+    width: 50;
 }
 /*-------------------/header------------*/
 /*------------------menu----------------*/
@@ -48,12 +48,12 @@ html {
     
     }
     .navbar-nav li {
-        float: none;
-        display: inline-block;
-    }
+    float: none;
+    display:inline-block; 
+    ;
     .navbar-inner {
         text-align:center;
-      }
+      }}
 /*-----------------/menu----------------*/
 /*-----------------slider----------------*/
 .owl-stage-outer{

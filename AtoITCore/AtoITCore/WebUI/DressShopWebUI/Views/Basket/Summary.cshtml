@@ -1,7 +1,7 @@
 ﻿@model Domain.Entityes.Basket
 <a href="@Url.Action("Index", new {returnUrl = Request.Url?.PathAndQuery})" class="basketLink">
    
-    <img src="~/Images/basketpic.png" alt="" class="basketPic">
+    <img src="~/img/cush.png" alt="Корзинка покупок" title="Корзина">
     @{
         if (Model.CountItem != 0)
         {
@@ -9,5 +9,3 @@
         }
     }
 </a>
-
-
