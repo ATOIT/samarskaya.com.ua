@@ -10,19 +10,21 @@
   margin-top: 10px;
   text-align: center;
   -webkit-tap-highlight-color: transparent; }
-  .owl-theme .owl-nav [class*='owl-'] {
-    color: #FFF;
-    font-size: 14px;
-    margin: 5px;
-    padding: 4px 7px;
-    background: #D6D6D6;
-    display: inline-block;
-    cursor: pointer;
-    border-radius: 3px; }
-    .owl-theme .owl-nav [class*='owl-']:hover {
-      background: #869791;
-      color: #FFF;
-      text-decoration: none; }
+    .owl-theme .owl-nav [class*='owl-'] {
+        color: #030403;
+        font-size: 14px;
+        margin: 5px;
+        padding: 4px 7px;
+        background: #a7e2a9;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+        .owl-theme .owl-nav [class*='owl-']:hover {
+            background: #8dbf8f;
+            color: #030403;
+            text-decoration: none;
+        }
   .owl-theme .owl-nav .disabled {
     opacity: 0.5;
     cursor: default; }

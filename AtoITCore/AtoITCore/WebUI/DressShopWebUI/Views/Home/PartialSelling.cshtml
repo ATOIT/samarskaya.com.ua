@@ -58,34 +58,41 @@
         }
 </style>
 <a href="@("#openModal" + Model.ProductId)">
-    <li class="product child">
-        @{
-            foreach (var i in Model.Photo)
-            {
-                if (i.Priority)
+    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+        <div class="card h-100">
+            @{
+                foreach (var i in Model.Photo)
                 {
-                    <img src="~/PhotoForDB/@i.PhotoUrl" class="productPic" title="@Model.Name" />
+                    if (i.Priority)
+                    {
+                        <a href="#"><img class="card-img-top" src="~/PhotoForDB/@i.PhotoUrl" alt="" width="240" height="320" title="@i.Product.Name"></a>
+                    }
                 }
-            }
-            if (Model.Discount != 0)
-            {
-                <div class="discount">
-                    <span class="discountValue">@(Model.Discount + "%")</span>
+                <div class="card-body">
+                    <h4 class="card-title">
+                       @Model.Name
+                    </h4>
+                    @if (Model.Discount != 0)
+                    {
+                    <div class="discount">
+                        <span class="discountValue">@(Model.Discount + "%")</span>
+                    </div>
+                    <h3 class="productName">
+                        <p class="price">
+                            <s>@(Model.Price) </s> <font color="red">@(Model.Price - Model.Price * Model.Discount / 100)</font> грн
+                        </p>"@Model.Name"
+                    </h3>
+                    }
+                    else
+                    {
+                    <h3 class="productName">
+                        <p class="price">@(Model.Price) грн</p>"@Model.Name"
+                    </h3>
+                    }
                 </div>
-                <h3 class="productName">
-                    <p class="price">
-                        <s>@(Model.Price) </s> <font color="red">@(Model.Price - Model.Price * Model.Discount / 100)</font> грн
-                    </p>"@Model.Name"
-                </h3>
             }
-            else
-            {
-                <h3 class="productName">
-                    <p class="price">@(Model.Price) грн</p>"@Model.Name"
-                </h3>
-            }
-        }
-    </li>
+        </div>
+    </div>
 </a>
 
 <div id="@("openModal" + Model.ProductId)" class="modalDialog">

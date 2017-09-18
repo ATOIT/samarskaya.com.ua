@@ -3,6 +3,10 @@ html {
     -webkit-text-size-adjust: 100%;
         -ms-text-size-adjust: 100%;
   }
+.body {
+    margin: 0;
+    padding: 0;
+}
 /*-------------------header----------------*/
 .header{
     background-color: #a7e2a9;
@@ -28,60 +32,86 @@ html {
     }
 .icon img{
     padding-left: 25px;
-    width: 50;
+    width: 50px;
 }
 /*-------------------/header------------*/
 /*------------------menu----------------*/
-.menu-top{
+.menu-top {
     height: 38px;
     font-size: 20px;
-    color: rgba(0, 0, 0, 255);
-    text-align: center;
 }
-.navbar-default{
+.navbar-default {
     background-color: #8dbf8f;
     float: none;
 }
-.navbar-nav {
+.navbar .navbar-nav {
+    display: inline-block;
     float: none;
+    vertical-align: top;
+}
+
+.navbar .navbar-collapse {
     text-align: center;
-    
-    }
-    .navbar-nav li {
-    float: none;
-    display:inline-block; 
-    ;
-    .navbar-inner {
-        text-align:center;
-      }}
+}
 /*-----------------/menu----------------*/
 /*-----------------slider----------------*/
 .owl-stage-outer{
-    height: 180px;
+    max-height: 260px;
 }
 .carousel{
     margin-top: 25px;
 }
 /*-----------------/slider----------------*/
 
-.tovar{
-    margin-top: 25px;
+/*-----------------content online-gardirob----------------*/
+.tovar-cart, .galerey-cart, .partner-cart {
+    text-align: center;
+    margin: 5px auto;
 }
-.h-100{
-    margin: 5px;
+
+.tovar-img, .galerey-img, .partner-img {
+    height: 320px;
+    width: 240px;
 }
-.h-100 h4{
+
+.tovar-opis, .galerey-opis, .partner-opis {
+    margin: 5px auto;
+}
+
+
+
+
+/*-----------------/content online-gardirob----------------*/
+/*-----------------content galerey----------------*/
+
+
+
+/*-----------------/content galerey----------------*/
+/*-----------------content partner----------------*/
+
+
+
+/*-----------------/content partner----------------*/
+
+.footer {
+    background-color: #a7e2a9;
+    margin-top: 20px;
+    margin-bottom: inherit;
+}
+
+th {
     text-align: center;
 }
-.justify-content{
-    margin: auto;
-}
-.footer{
-    background-color: #a7e2a9;  
-}
-th{
+
+.footer h4, h5 {
     text-align: center;
 }
-.footer h4{
-    text-align: center;
+
+.webforyou {
+    margin-top: 15px;
 }
+
+    .webforyou a {
+        text-decoration: none;
+        color: black;
+    } 
