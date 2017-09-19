@@ -11,10 +11,7 @@ namespace Domain.Entityes
     /// </summary>
     public class Product
     {
-        public Product()
-        {
-            //Photo = new HashSet<Photo>();
-        }
+        
         [Key]
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
@@ -55,5 +52,6 @@ namespace Domain.Entityes
 
         public virtual ICollection<Photo> Photo { get; set; }
         
+        public virtual OrderDetails OrderDetails { get; set; }
     }
 }
