@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entityes
 {
     public class OrderDetails
     {
-        public virtual ICollection<Product> Product { get; set; }
-
         [Display(Name = "Имя")]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "Длина имени от 3 до 20 символов")]
         [Required(ErrorMessage = "Пожалуйста, введите Ваше имя")]

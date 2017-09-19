@@ -34,6 +34,7 @@ namespace DressShopWebUI.Infrastructure
             _kernel.Bind<IProductRepository>().To<EfProductRepository>();
             _kernel.Bind<IReviewsRepository>().To<EfReviewRepository>();
             _kernel.Bind<IEmailSending>().To<EmailSending>();
+            _kernel.Bind<IOrderRepository>().To<EfOrderRepository>();
             _kernel.Bind<IAuthProvider>().To<FormAuthProvider>();
         }
     }

@@ -11,8 +11,10 @@ namespace DressShopWebUI.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IEmailSending _emailSending;
-        public BasketController(IProductRepository productRepository, IEmailSending emailSending)
+        private readonly IOrderRepository _orderRepository;
+        public BasketController(IProductRepository productRepository, IEmailSending emailSending, IOrderRepository orderRepository)
         {
+            _orderRepository = orderRepository;
             _productRepository = productRepository;
             _emailSending = emailSending;
         }
@@ -41,10 +43,11 @@ namespace DressShopWebUI.Controllers
             //Проверяем валидность модели, и наличие товаров в корзине
             if (ModelState.IsValid && basket.CountItem!=0)
             {
+                //добавляем в базу заказ
+                _orderRepository.SaveOrder(basketViewModel.Orders, basket);
                 //Отсылаем письма
                 _emailSending.SendMailToAdministrator(basket,basketViewModel.Orders,null);
                 _emailSending.SendMail(basket, basketViewModel.Orders, null);
-
                 return RedirectToAction("Thanks","Basket");
             }
            

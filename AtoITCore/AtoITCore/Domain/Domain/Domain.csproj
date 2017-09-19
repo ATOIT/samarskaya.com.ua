@@ -78,13 +78,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstrac\IEmailSending.cs" />
+    <Compile Include="Abstrac\IOrderRepository.cs" />
     <Compile Include="Abstrac\IProductRepository.cs" />
     <Compile Include="Abstrac\IReviewsRepository.cs" />
+    <Compile Include="Concrete\EfOrderRepository.cs" />
     <Compile Include="Concrete\EfProductRepository.cs" />
     <Compile Include="Concrete\EfReviewRepository.cs" />
     <Compile Include="Concrete\EmailSending.cs" />
     <Compile Include="Concrete\ShopContext.cs" />
     <Compile Include="Entityes\Basket.cs" />
+    <Compile Include="Entityes\Order.cs" />
     <Compile Include="Entityes\OrderDetails.cs" />
     <Compile Include="Entityes\Photo.cs" />
     <Compile Include="Entityes\Product.cs" />

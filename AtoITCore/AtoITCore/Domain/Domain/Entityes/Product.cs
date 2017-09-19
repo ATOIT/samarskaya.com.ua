@@ -5,13 +5,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entityes
 {
-
     /// <summary>
     /// Сущьность продукта
     /// </summary>
     public class Product
     {
-        
         [Key]
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
@@ -49,9 +47,7 @@ namespace Domain.Entityes
         [Required(ErrorMessage = "Пожалуйста, укажите категорию")]
         public string Category { get; set; }
 
-
         public virtual ICollection<Photo> Photo { get; set; }
         
-        public virtual OrderDetails OrderDetails { get; set; }
     }
 }

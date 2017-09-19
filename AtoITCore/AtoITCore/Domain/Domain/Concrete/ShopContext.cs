@@ -14,6 +14,6 @@ namespace Domain.Concrete
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
-        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
     }
 }
