@@ -44,6 +44,7 @@ namespace DressShopWebUI.Controllers
                 //Отсылаем письма
                 _emailSending.SendMailToAdministrator(basket,basketViewModel.Orders,null);
                 _emailSending.SendMail(basket, basketViewModel.Orders, null);
+
                 return RedirectToAction("Thanks","Basket");
             }
            

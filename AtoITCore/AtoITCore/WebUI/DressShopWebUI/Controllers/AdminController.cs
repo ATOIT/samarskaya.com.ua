@@ -372,6 +372,14 @@ namespace DressShopWebUI.Controllers
         //------------------------------------------------------------------------------------------------------------------------------------
         #endregion
 
+        #region заказы
+
+        public ActionResult OrdeResult()
+        {
+            return View();
+        }
+
+        #endregion
     }
     //emum для сортировки по дате
     public enum SortType
