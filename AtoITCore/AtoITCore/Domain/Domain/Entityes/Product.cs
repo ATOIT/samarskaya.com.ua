@@ -48,6 +48,8 @@ namespace Domain.Entityes
         public string Category { get; set; }
 
         public virtual ICollection<Photo> Photo { get; set; }
+
+        public virtual Order Order { get; set; }
         
     }
 }

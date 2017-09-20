@@ -1,8 +1,45 @@
-﻿
+﻿@model IEnumerable<Domain.Entityes.Order>
+@using DressShopWebUI.Controllers
 @{
-    ViewBag.Title = "Заказы";
+    ViewBag.Title = "Заказі";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
-
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success" align="center">@TempData["message"]</div>
+}
+<br />
+<label for="dateSelect">Отсортировать по дате добавления заказа</label>
+<select id="dateSelect">
+    <option value="@((int)SortType.None)"></option>
+    <option value="@((int)SortType.Before)">от последних к первым</option>
+    <option value="@((int)SortType.Later)">от первых к последним </option>
+</select>
+<label for="statusSelect">Отсортировать по статусу</label>
+<select id="statusSelect">
+    <option value="0"></option>
+    <option value="1">новые заказы</option>
+    <option value="2">выполненные заказы</option>
+</select>
+<br />
+<br />
+<div id="divReviews">
+    @Html.Partial("PartialOrdeResult", Model)
+</div>
+<script>
+    $(document).ready(function() {
+        $("#dateSelect").change(function () {
+            var data = {
+                sortType: $("#dateSelect option:selected").val()
+            };
+            $.ajax({
+                url: "/Admin/EditingReviews",
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    $("#divReviews").html(data);
+                }
+            });
+        });
+    })
+</script>

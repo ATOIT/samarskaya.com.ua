@@ -237,6 +237,7 @@
     <Content Include="Views\Home\NewFeedback.cshtml" />
     <Content Include="Views\Home\Slider.cshtml" />
     <Content Include="Views\Admin\OrdeResult.cshtml" />
+    <Content Include="Views\Admin\PartialOrdeResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

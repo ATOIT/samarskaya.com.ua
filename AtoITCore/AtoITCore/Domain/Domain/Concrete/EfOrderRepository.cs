@@ -15,7 +15,9 @@ namespace Domain.Concrete
         {
             if (basket.Lines.Count()!=0 && details!= null)
             {
-                _context.Orders.Add(new Order
+                List<Product> products = new List<Product>();
+
+                Order newOrder = new Order
                 {
                     Address = details.Address,
                     ClientName = details.ClientName,
@@ -24,9 +26,17 @@ namespace Domain.Concrete
                     Payment = details.Payment,
                     Phone = details.Phone,
                     Сomment = details.Сomment,
-                    Status = "новый"
-                });
+                    Status = "новый",
+                    Products = basket.Lines
+                };
+                _context.Orders.Add(newOrder);
                 _context.SaveChanges();
+                //foreach (var i in basket.Lines)
+                //{
+                //    var product = _context.Product.FirstOrDefault(x => x.ProductId == i.ProductId );
+                //    if (product != null) product.Order = newOrder;
+                //}
+                //_context.SaveChanges();
             }
             else
                     throw new Exception();

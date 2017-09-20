@@ -19,9 +19,11 @@ namespace DressShopWebUI.Controllers
     {
         private readonly IReviewsRepository _reviewsRepository;
         private readonly IProductRepository _productRepository;
+        private readonly IOrderRepository _orderRepository;
 
-        public AdminController(IProductRepository productRepository, IReviewsRepository reviewsRepo)
+        public AdminController(IProductRepository productRepository, IReviewsRepository reviewsRepo, IOrderRepository orderRepo)
         {
+            _orderRepository = orderRepo;
             _productRepository = productRepository;
             _reviewsRepository = reviewsRepo;
         }
@@ -376,7 +378,7 @@ namespace DressShopWebUI.Controllers
 
         public ActionResult OrdeResult()
         {
-            return View();
+            return View(_orderRepository.Orders.OrderByDescending(x=>x.DateOrder));
         }
 
         #endregion
