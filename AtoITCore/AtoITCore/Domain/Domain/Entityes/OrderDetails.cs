@@ -39,6 +39,6 @@ namespace Domain.Entityes
 
         [Display(Name = "Дата заказа")]
         [Required]
-        public DateTime DateOrder => DateTime.Now;
+        public DateTime DateOrder { get; set; }
     }
 }

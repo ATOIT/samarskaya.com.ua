@@ -13,10 +13,7 @@ namespace Domain.Entityes
         [Display(Name = "Статус заказу")]
         [Required]
         public string Status { get; set; }
-        public IEnumerable<Product> Products { get; set; }
-        public Order()
-        {
-            Products = new List<Product>();
-        }
-    }
+        public virtual ICollection<Product> Products { get; set; }
+        
+      }
 }

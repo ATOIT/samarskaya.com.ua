@@ -375,11 +375,86 @@ namespace DressShopWebUI.Controllers
         #endregion
 
         #region заказы
-
+            //стартовая страница
         public ActionResult OrdeResult()
         {
             return View(_orderRepository.Orders.OrderByDescending(x=>x.DateOrder));
         }
+
+        [HttpPost]
+        public ActionResult OrdeResult(SortType sortType, int? sortStatus)
+        {
+            IEnumerable<Order> sortOrders;
+            switch (sortStatus)
+            {
+                case 1:
+                    sortOrders = _orderRepository.Orders.Where(x => x.Status == "новый").OrderByDescending(x => x.DateOrder);
+                    return PartialView("PartialOrdeResult", sortOrders);
+                case 2:
+                    sortOrders = _orderRepository.Orders.Where(x => x.Status == "выполненный").OrderByDescending(x=>x.DateOrder);
+                    return PartialView("PartialOrdeResult", sortOrders);
+
+            }
+            switch (sortType)
+            {
+                case SortType.Before:
+                    sortOrders = _orderRepository.Orders.OrderByDescending(x => x.DateOrder);
+                    return PartialView("PartialOrdeResult", sortOrders);
+                case SortType.Later:
+                    sortOrders = _orderRepository.Orders.OrderBy(x => x.DateOrder);
+                    return PartialView("PartialOrdeResult", sortOrders);
+            }
+            return PartialView("PartialOrdeResult", _orderRepository.Orders.OrderByDescending(x => x.DateOrder));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------Заказ выполнен----------------------------------------------------
+        public ActionResult OrderOk(int orderId)
+        {
+            try
+            {
+                _orderRepository.OrderComplite(orderId);
+            }
+            catch (Exception)
+            {
+                TempData["message"] = "Что то не так :( Статус не был изменен!";
+            }
+            return PartialView("PartialOrdeResult", _orderRepository.Orders.OrderByDescending(x => x.DateOrder));
+        }
+        //--------------------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------Заказ новый-------------------------------------------------------
+        public ActionResult OrderNew(int orderId)
+        {
+            try
+            {
+                _orderRepository.OrderNew(orderId);
+            }
+            catch (Exception)
+            {
+                TempData["message"] = "Что то не так :( Статус не был изменен!";
+            }
+            return PartialView("PartialOrdeResult", _orderRepository.Orders.OrderByDescending(x => x.DateOrder));
+        }
+        //--------------------------------------------------------------------------------------------------------------
+
+        //--------------------------------------------удаление заказа---------------------------------------------------
+        public ActionResult OrderDelite(int orderId)
+        {
+            try
+            {
+                _orderRepository.RemoveOrder(orderId);
+                return PartialView("PartialOrdeResult", _orderRepository.Orders.OrderByDescending(x => x.DateOrder));
+            }
+            catch (Exception)
+            {
+                TempData["message"] = "Что то не так :( Заказ не был удален!";
+                return PartialView("PartialOrdeResult", _orderRepository.Orders.OrderByDescending(x => x.DateOrder));
+            }
+            
+        }
+        //--------------------------------------------------------------------------------------------------------------
 
         #endregion
     }

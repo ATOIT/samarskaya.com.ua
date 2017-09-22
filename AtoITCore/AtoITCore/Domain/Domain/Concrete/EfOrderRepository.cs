@@ -13,49 +13,50 @@ namespace Domain.Concrete
 
         public void SaveOrder(OrderDetails details, Basket basket)
         {
-            if (basket.Lines.Count()!=0 && details!= null)
+            if (basket.Lines.Count() != 0 && details != null)
             {
-                List<Product> products = new List<Product>();
-
-                Order newOrder = new Order
+                try
                 {
-                    Address = details.Address,
-                    ClientName = details.ClientName,
-                    Delivery = details.Delivery,
-                    Email = details.Email,
-                    Payment = details.Payment,
-                    Phone = details.Phone,
-                    Сomment = details.Сomment,
-                    Status = "новый",
-                    Products = basket.Lines
-                };
-                _context.Orders.Add(newOrder);
-                _context.SaveChanges();
-                //foreach (var i in basket.Lines)
-                //{
-                //    var product = _context.Product.FirstOrDefault(x => x.ProductId == i.ProductId );
-                //    if (product != null) product.Order = newOrder;
-                //}
-                //_context.SaveChanges();
+                    Order newOrder = new Order
+                    {
+                        Address = details.Address,
+                        ClientName = details.ClientName,
+                        Delivery = details.Delivery,
+                        Email = details.Email,
+                        Payment = details.Payment,
+                        Phone = details.Phone,
+                        Сomment = details.Сomment,
+                        DateOrder = DateTime.Now,
+                        Status = "новый"
+                    };
+                    _context.Orders.Add(newOrder);
+                    _context.SaveChanges();
+                    foreach (var i in basket.Lines)
+                    {
+                        var productInLines = _context.Product.FirstOrDefault(x => x.ProductId == i.ProductId);
+                        if (productInLines != null) productInLines.Order = _context.Orders.FirstOrDefault(x => x.OrderId == newOrder.OrderId);
+                        _context.SaveChanges();
+                    }
+                }
+                catch (Exception)
+                {
+                    //ignored
+                }
             }
             else
-                    throw new Exception();
-            }
+                throw new Exception();
+        }
 
         public void RemoveOrder(int orderId)
         {
             var oneOrder = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
             if (oneOrder != null)
             {
-                Order order = _context.Orders.Find(oneOrder.OrderId);
-                if (order != null)
-                {
-                    _context.Orders.Remove(oneOrder);
-                    _context.SaveChanges();
-                }
-                else
-                    throw new Exception();
+                _context.Orders.Remove(oneOrder);
+                _context.SaveChanges();
             }
+            else
+                throw new Exception();
         }
 
         public void OrderComplite(int orderId)
@@ -63,15 +64,11 @@ namespace Domain.Concrete
             var oneOrder = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
             if (oneOrder != null)
             {
-                Order order = _context.Orders.Find(oneOrder.OrderId);
-                if (order != null)
-                {
-                    order.Status = "выполненный";
-                    _context.SaveChanges();
-                }
-                else
-                    throw new Exception();
+                oneOrder.Status = "выполненный";
+                _context.SaveChanges();
             }
+            else
+                throw new Exception();
         }
 
         public void OrderNew(int orderId)
@@ -79,15 +76,11 @@ namespace Domain.Concrete
             var oneOrder = _context.Orders.FirstOrDefault(x => x.OrderId == orderId);
             if (oneOrder != null)
             {
-                Order order = _context.Orders.Find(oneOrder.OrderId);
-                if (order != null)
-                {
-                    order.Status = "новый";
-                    _context.SaveChanges();
-                }
-                else
-                    throw new Exception();
+                oneOrder.Status = "новый";
+                _context.SaveChanges();
             }
+            else
+                throw new Exception();
         }
     }
 }

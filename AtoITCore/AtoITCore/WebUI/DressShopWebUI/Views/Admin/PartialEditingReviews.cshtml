@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Domain.Entityes.Reviews>
-<table class="table" style="background-color: lightgrey">
+<table class="table" style="border: 5px">
     <tr>
         <th class="text-center">
-            @Html.DisplayNameFor(model => model.ClientName)
+            <strong>@Html.DisplayNameFor(model => model.ClientName)</strong>
         </th>
         <th class="text-center">
             @Html.DisplayNameFor(model => model.ClientFeedback)
@@ -58,6 +58,7 @@
                     @Html.Hidden("ReviewId", item.ReviewId)
                     <input type="submit"
                            class="btn btn-default btn-xs"
+                           style="background-color: aquamarine"
                            value="Редактировать" />
                 }
             </td>
@@ -67,6 +68,7 @@
                     @Html.Hidden("ReviewId", item.ReviewId)
                     <input type="submit"
                            class="btn btn-default btn-xs"
+                           style="background-color:  aquamarine"
                            value="Удалить" />
                 }
             </td>

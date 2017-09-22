@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Domain.Abstrac;
 using Domain.Entityes;
@@ -12,13 +13,15 @@ namespace DressShopWebUI.Controllers
         private readonly IProductRepository _productRepository;
         private readonly IEmailSending _emailSending;
         private readonly IOrderRepository _orderRepository;
-        public BasketController(IProductRepository productRepository, IEmailSending emailSending, IOrderRepository orderRepository)
+
+        public BasketController(IProductRepository productRepository, IEmailSending emailSending,
+            IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
             _productRepository = productRepository;
             _emailSending = emailSending;
         }
-        
+
         //отображение корзины
         public ViewResult Index(Basket basket, string returnUrl)
         {
@@ -27,7 +30,7 @@ namespace DressShopWebUI.Controllers
                 Basket = basket,
                 ReturnUrl = returnUrl
             };
-            if (userBasket.Basket.CountItem==0)
+            if (userBasket.Basket.CountItem == 0)
             {
                 ViewBag.Sorry = "Ваша корзина пуста";
             }
@@ -37,14 +40,22 @@ namespace DressShopWebUI.Controllers
 
         // POST метод, оформления заказа
         [HttpPost]
-        public ActionResult Index( BasketViewModel basketViewModel, Basket basket)
+        public ActionResult Index(BasketViewModel basketViewModel, Basket basket)
         {
             //Добавляем в связыватель товары из корзины
             //Проверяем валидность модели, и наличие товаров в корзине
-            if (ModelState.IsValid && basket.CountItem!=0)
+            if (ModelState.IsValid && basket.CountItem != 0)
             {
                 //добавляем в базу заказ
-                _orderRepository.SaveOrder(basketViewModel.Orders, basket);
+                try
+                {
+                    _orderRepository.SaveOrder(basketViewModel.Orders, basket);
+                }
+                catch (Exception)
+                {
+                    //ignored
+                }
+
                 //Отсылаем письма
                 _emailSending.SendMailToAdministrator(basket,basketViewModel.Orders,null);
                 _emailSending.SendMail(basket, basketViewModel.Orders, null);

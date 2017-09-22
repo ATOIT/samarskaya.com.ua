@@ -13,14 +13,14 @@
 }
 
 <a href="/Admin/AddProduct" class="btn btn-primary btn-lg">Добавить товар</a>
-<label for="categorySelect">Отсортировать по категории:</label>
+<label for="categorySelect" style="background-color: bisque">Отсортировать по категории:</label>
 <select id="categorySelect">
     <option value="@((int)CategoryProduct.None)"></option>
     <option value="@((int)CategoryProduct.Selling)">ONLINE-гардероб</option>
     <option value="@((int)CategoryProduct.Gallery)">Галерея</option>
     <option value="@((int)CategoryProduct.Partners)">Партнерское</option>
 </select>
-<label for="nameSearch">Найти товар по названию:</label>
+<label for="nameSearch" style="background-color: bisque">Найти товар по названию:</label>
 <input id="nameSearch" type="text" /><input id="ButtonSearch" type="button" value="Найти" class="btn btn-default btn-xs"/>
 <br /><br />
 
