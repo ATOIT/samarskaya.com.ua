@@ -1,0 +1,149 @@
+﻿@model ICollection<Domain.Entityes.Photo>
+
+@if (!Model.Count.Equals(0))
+{
+   <h3 align="center" style="color:  red">@ViewBag.Error</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th class="text-center">
+                Фото
+            </th>
+            <th class="text-center">
+                Приоритет
+            </th>
+            <th class="text-center">
+                Выбор приоритета
+            </th>
+            <th class="text-center">
+                Удаление
+            </th>
+        </tr>
+
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/PhotoForDB/@i.PhotoUrl" width="60" height="70" />
+                </td>
+                <td>
+                    @if (i.Priority.
+                        Equals(true))
+                    {
+
+                        <i>Основное фото</i>
+                    }
+                    @if (i.Priority.
+                        Equals(false))
+                    {
+
+                        <i>Дополнительное фото</i>
+                    }
+                </td>
+                <td class="text-center">
+                    <input type="button" id="@(i.PhotoId+"ButtonEdit")"
+                           class="btn btn-default btn-xs"
+                           style="background-color:  aquamarine"
+                           value="Установить как основное фото" />
+                    <script>
+                        $(document)
+                            .ready(function () {
+                                $("#@(i.PhotoId+"ButtonEdit")")
+                                    .click(function () {
+                                        var prior = "@i.Priority";
+                                        if (prior === "True")
+                                            return false;
+                                        var data = {
+                                            idProduct: ('@i.Product.ProductId'),
+                                            id: ('@i.PhotoId')
+                                        };
+                                        $.ajax({
+                                            url: "/Admin/PriorityСhangesPhoto",
+                                            type: "POST",
+                                            data: data,
+                                            success: function (data) {
+                                                $("#photoId").html(data);
+                                            }
+                                        });
+                                        return true;
+                                    });
+                            });
+                    </script>
+                </td>
+                <td class="text-center">
+                    <input type="button" id="@(i.PhotoId+"ButtonDelete")"
+                           class="btn btn-default btn-xs"
+                           style="background-color:  bisque"
+                           value="Удалить фото" />
+                    <script>
+                        $(document)
+                            .ready(function () {
+
+                                $("#@(i.PhotoId+ "ButtonDelete")")
+                                    .click(function () {
+                                        var data = {
+                                            idProduct: ('@i.Product.ProductId'),
+                                            id: ('@i.PhotoId')
+                                        };
+                                        $.ajax({
+                                            url: "/Admin/DeletePhoto",
+                                            type: "POST",
+                                            data: data,
+                                            success: function (data) {
+                                                $("#photoId").html(data);
+                                            }
+                                        });
+                                    });
+                            });
+                    </script>
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @if (Model.Count < 8)
+        {
+            <form id="fileUpload" action="@Url.Action("UploadPhoto")" method="POST" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" value="Добавить фото к товару" style="background-color: azure" id="btnFileUpload">
+                        </td>
+                        <td>
+                            <input id="fileInput" type="file" style="background-color: azure" value="Выбрать фото">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        }
+    </div>
+                    <script type="text/javascript">
+                        $(document)
+                            .ready(function () {
+                                $("#btnFileUpload")
+                                    .click(function () {
+                                        var formData = new FormData();
+                                        formData.append("productId", '@Model.First().Product.ProductId');
+                                        //  debugger;
+                                        var file = document.getElementById("fileInput").files[0];
+                                        if (file == null)
+                                            return false;
+                                        formData.append("fileInput", file);
+                                        //  debugger;
+                                        $.ajax({
+                                            url: "/Admin/UploadPhoto",
+                                            type: "POST",
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            success: function (data) {
+                                                $("#photoId").html(data);
+                                            }
+                                        });
+                                        return true;
+                                    });
+                            })
+
+                    </script>
+
+}
+

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@{
+    ViewBag.Title = "Партнеры";
+}
+   <!-------------------MENU---------------->
+<div class="row menu-top">
+    <div class="container-fuild menu">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/Home/Index"><span>О ДИЗАЙНЕРЕ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/Selling"><span>ONLINE-ГАРДЕРОБ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/Gallery"><span>ГАЛЕРЕЯ</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="/Home/Partners"><span>ПАРТНЕРЫ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/ClientFeedback"><span>ОТЗЫВЫ</span></a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>
+<!------------------/MENU--------------->
+<!------------------SLIDER---------------->
+@Html.Action("Slider", "Home")
+<!------------------/SLIDER---------------->
+<div class="container">
+    <div class="row">
+        @foreach (var i in Model)
+        {
+            @Html.Partial("PartialPartners", i)
+        }
+    </div>
+</div>
+@*метод формирующий представление для плавающей корзины*@
+@Html.Action("BasketOnView", "Basket")

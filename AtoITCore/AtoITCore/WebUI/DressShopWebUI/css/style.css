@@ -1,0 +1,188 @@
+html {
+    font-family:SegoeUI-Light, SegoeUI-Light, AdobeInvisFont, MyriadPro-Regular sans-serif;
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+  }
+.body{
+    margin: 0;
+    padding: 0;
+    }
+/*-------------------header----------------*/
+.header{
+    background-color: #a7e2a9;
+    margin: 10px 0;
+}
+.headerpat{
+    height: 84px;
+    background: url(../img/patern.png);
+}
+.logo {
+    text-align: right;
+    padding-right: 30px;
+}
+.name, .icon{
+    text-align: center;
+}
+.name{
+    margin-top: 15px;
+}
+.icon{
+    text-align: left;
+    padding-top: 20px;
+    }
+.icon img{
+    padding-left: 25px;
+    width: 50;
+}
+/*-------------------/header------------*/
+/*------------------menu----------------*/
+.menu-top{
+    height: 38px;
+    font-size: 20px;
+}
+.navbar-default{
+    background-color: #8dbf8f;
+    float: none;
+}
+.navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+      }
+.navbar .navbar-collapse {
+        text-align: center;
+      }
+
+/*-----------------/menu----------------*/
+/*-----------------slider----------------*/
+.owl-stage-outer{
+    max-height: 260px;
+}
+.carousel{
+    margin-top: 25px;
+}
+/*-----------------/slider----------------*/
+
+/*-----------------content online-gardirob----------------*/
+.tovar-cart, .galerey-cart, .partner-cart {
+   align-self: auto;
+ }
+.tovar-img, .galerey-img, .partner-img {
+    height: 320px;
+    width: 240px;
+}
+.tovar-opis, .galerey-opis, .partner-opis  {
+    margin: 0 auto;
+}
+.tovar, .partner, .galerey {
+    border: 1px solid #8dbf8f;
+    border-radius: 5px;
+    box-shadow:0px 0px 5px 0px rgba(50, 50, 50, 0.58);
+    margin-left: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.tovar-opis, .partner-opis, .galerey-opis p{
+    font-size: 16px;
+}
+.tovar-opis, .galerey-opis, .partner-opis strong {
+    font-size: 20px;
+}
+.discount {
+    position: absolute;
+    top: 30px;
+}
+.discountValue {
+    display: block;
+    width: 60px;
+    height: 25px;
+    background-color: red;
+    text-align: center;
+    font-size: 15px;
+    color: white;
+}
+.price {
+    text-align: center;
+}
+
+/*-----------------/content online-gardirob----------------*/
+/*-----------------content galerey----------------*/
+
+
+
+/*-----------------/content galerey----------------*/
+/*-----------------MODAL----------------*/
+.modal-title{
+    text-align: center;
+}
+.modalimg{
+    text-align: center;
+}
+.modalimg img{
+	max-width:100%;
+   max-height: 100%;
+}
+/* CSS used here will be applied after bootstrap.css */
+.carousel {
+    margin-top: 20px;
+}
+.item .thumb {
+	width: 25%;
+	cursor: pointer;
+	float: left;
+}
+.item .thumb img {
+	width: 100%;
+	margin: 2px;
+}
+.item img {
+	width: 100%;	
+}
+
+
+/*-----------------/MODAL----------------*/
+
+
+.footer{
+    background-color: #a7e2a9;
+    margin-top: 20px;
+    margin-bottom: inherit;
+}
+
+th{
+    text-align: center;
+}
+.footer h4, h5{
+    text-align: center;
+}
+.webforyou{
+    margin-top: 15px;
+    
+    }
+.webforyou a { 
+    text-decoration: none; 
+    color: black;
+   } 
+   /*------------------------ ошибки валидации -------------------------*/ 
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+/*------------------------ ошибки валидации -------------------------*/ 

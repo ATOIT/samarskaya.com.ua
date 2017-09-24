@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success" align="center"><h3>@TempData["message"]</h3></div>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th class="text-center">
+            Фото
+        </th>
+        <th class="text-center">
+            Категория
+        </th>
+        <th class="text-center">
+            Имя
+        </th>
+        <th class="text-center">
+            Цена
+        </th>
+        <th class="text-center">
+            Скидка
+        </th>
+        <th class="text-center">
+            Описание
+        </th>
+        <th class="text-center">
+            Специальное предложение
+        </th>
+        <th class="text-center">
+            Действия над товаром
+        </th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>
+                @foreach (var a in i.Photo)
+                {
+                    if (a.Priority)
+                    {
+                        <img src="~/PhotoForDB/@a.PhotoUrl" width="60" height="70" />
+                    }
+                }
+
+            </td>
+            <td>
+                @if (i.Category.Equals("Selling"))
+                {
+
+                    <i>ONLINE-гардероб</i>
+                }
+
+                @if (i.Category.Equals("Gallery"))
+                {
+                    <i>Галерея</i>
+                }
+
+                @if (i.Category.Equals("Partners"))
+                {
+                    <i>Партнерское</i>
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.Name)
+            </td>
+            <td>
+                @(i.Price) грн.
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.Discount) %
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => i.SpecOffer)
+            </td>
+            <td class="text-center">
+                @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Get))
+                {
+                    @Html.Hidden("ProductId", i.ProductId)
+                    <input type="submit"
+                           class="btn btn-default btn-xs"
+                           style="background-color:  aquamarine"
+                           value="Редактировать" />
+                }
+                <br/>
+                <input class="btn btn-default btn-xs" id="@(i.ProductId + "Dell")" onClick="getElementById('@(i.ProductId + "DellModal")').removeAttribute('style');" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" style="background-color: bisque" />
+
+                <div id="@(i.ProductId + "DellModal")" style="display:none;">
+                    <div class="overlayModal"></div>
+                    <div class="visibleModal">
+                        <h4 align="center">Товар - <strong>"@i.Name"</strong></h4>
+                        <br />
+                        <h4 align="center" style="color: red">Вы точно хотите удалить этот товар?</h4>
+                        <h5 align="center" style="color: red">(перед удалением, проверьте, не заказан ли этот товар)</h5>
+                        <input id="@(i.ProductId + "DellYes")" onClick="getElementById('@(i.ProductId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Да&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: left; background-color: aquamarine" />
+                        <input id="@(i.ProductId + "DellNo")" onClick="getElementById('@(i.ProductId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Нет&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: right; background-color: aquamarine" />
+                        <br />
+                    </div>
+                </div>
+                <script>
+                        $(document)
+                               .ready(function () {
+                                   $("#@(i.ProductId + "DellYes")")
+                                       .click(function () {
+                                           var data = {
+                                               productId: ('@i.ProductId')
+                                           };
+                                           $.ajax({
+                                               url: "/Admin/DeleteProduct",
+                                               type: "POST",
+                                               data: data,
+                                               success: function (data) {
+                                                   $("#divProductInAdmin").html(data);
+                                               }
+                                           });
+                                       });
+                               });
+                </script>
+                @*@using (Html.BeginForm("DeleteProduct", "Admin", FormMethod.Post))
+                {
+                    @Html.Hidden("ProductId", i.ProductId)
+                    <input type="submit"
+                           class="btn btn-default btn-xs"
+                           style="background-color:  bisque"
+                           value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" />
+                }*@
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+<div class="container carousel">
+    <div class="owl-carousel owl-theme">
+        @{
+            string path = "";
+            foreach (var a in Model)
+            {
+                foreach (var i in a.Photo)
+                {
+                    if (i.Priority)
+                    {
+                        if (i.Product.Category.Equals("Selling"))
+                        {
+                            path = "/Home/Selling";
+                        }
+                        if (i.Product.Category.Equals("Gallery"))
+                        {
+                            path = "/Home/Gallery";
+                        }
+                        if (i.Product.Category.Equals("Partners"))
+                        {
+                            path = "/Home/Partners";
+                        }
+
+                        <div class="item"><a href="@path"><img title="@a.Name" src="~/PhotoForDB/@i.PhotoUrl" alt="" /></a></div>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            loop: true, //Зацикливаем слайдер
+            margin: 20, //Отступ от картино если выводите больше 1
+            nav: true, //Отключил навигацию
+            navText: ['&nbsp;назад&nbsp;', 'вперед'],//(изменить) текст кнопок навигации 
+            dots: false, //Отображение навигационных «точек»
+            autoplay: true, //Автозапуск слайдера
+            smartSpeed: 2000, //Время движения слайда
+            autoplayTimeout: 4000, //Время смены слайда
+            responsive: { //Адаптация в зависимости от разрешения экрана
+                50: {
+                    items: 0
+                },
+                100: {
+                    items: 1
+                },
+                200: {
+                    items: 6
+                }
+            }
+        });
+    });
+</script>

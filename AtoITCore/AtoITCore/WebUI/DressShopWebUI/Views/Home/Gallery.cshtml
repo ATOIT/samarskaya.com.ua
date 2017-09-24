@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Domain.Entityes.Product>
+@{
+    ViewBag.Title = "Галерея";
+}
+<!-------------------MENU---------------->
+<div class="row menu-top">
+    <div class="container-fuild menu">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/Home/Index"><span>О ДИЗАЙНЕРЕ</span></a>
+                    </li>
+                    <li >
+                        <a href="/Home/Selling"><span>ONLINE-ГАРДЕРОБ</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="/Home/Gallery"><span>ГАЛЕРЕЯ</span></a>
+                    </li>
+                    <li >
+                        <a href="/Home/Partners"><span>ПАРТНЕРЫ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/ClientFeedback"><span>ОТЗЫВЫ</span></a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>
+<!------------------/MENU--------------->
+<!------------------SLIDER---------------->
+@Html.Action("Slider", "Home")
+<!------------------/SLIDER---------------->
+<div class="container">
+    <div class="row">
+        @foreach (var a in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 galerey">
+                <figure>
+                    <div class="galerey-cart">
+                        <figcaption>
+                            @foreach (var i in a.Photo)
+                            {
+                                if (i.Priority)
+                                {
+                                    <a href="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#@("myModal"+ a.ProductId)">
+                                        <img class="galerey-img" src="~/PhotoForDB/@i.PhotoUrl" alt="" title="@i.Product.Name">
+                                    </a>
+                                }
+                            }
+                            <div class="galerey-opis">
+                                <strong class="galerey-name">@a.Name</strong>
+                            </div>
+                        </figcaption>
+                    </div><!-- /. cart -->
+                </figure>
+            </div><!-- /.col -->
+            <!------------------/CONTENT---------------->
+            <!------------------MODAL--------------->
+            <div id="@("myModal"+ a.ProductId)" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                        <div class="modal-body modalimg">
+                            @foreach (var i in a.Photo)
+                            {
+                                if (i.Priority)
+                                {
+                                        <img  src="~/PhotoForDB/@i.PhotoUrl" alt="" >
+                                }
+                            }
+                            <br><br>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">ЗАКРЫТЬ</button>
+                    </div>
+                </div>
+            </div>
+            <!------------------/MODAL---------------->
+        }
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+

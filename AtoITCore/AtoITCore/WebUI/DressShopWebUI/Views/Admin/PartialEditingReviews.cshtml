@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Domain.Entityes.Reviews>
+<table class="table table-bordered">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.ClientName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.ClientFeedback)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Advantages)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.LackOf)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.DateFeedback)
+        </th>
+        <th class="text-center">
+            Действия над отзывом
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                <strong>@Html.DisplayFor(modelItem => item.ClientName)</strong>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientFeedback)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Advantages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LackOf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFeedback)
+            </td>
+            <td class="text-center">
+                @using (Html.BeginForm("EditReview", "Admin", FormMethod.Get))
+                {
+                    @Html.Hidden("ReviewId", item.ReviewId)
+                    <input type="submit"
+                           class="btn btn-default btn-xs"
+                           style="background-color: aquamarine"
+                           value="Редактировать" />
+                }
+                <br/>
+                <br />
+                <input  class="btn btn-default btn-xs" id="@(item.ReviewId + "Dell")" onClick="getElementById('@(item.ReviewId + "DellModal")').removeAttribute('style');" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" style="background-color: bisque" />
+
+                <div id="@(item.ReviewId + "DellModal")" style="display:none;">
+                    <div class="overlayModal"></div>
+                    <div class="visibleModal">
+                        <h4 align="center">Отзыв клиента - <strong>@item.ClientName</strong></h4>
+                        <br />
+                        <h4 align="center" style="color: red">Вы точно хотите удалить этот отзыв?</h4>
+                        <input id="@(item.ReviewId + "DellYes")" onClick="getElementById('@(item.ReviewId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Да&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: left; background-color: aquamarine" />
+                        <input id="@(item.ReviewId + "DellNo")" onClick="getElementById('@(item.ReviewId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Нет&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: right; background-color: aquamarine" />
+                        <br />
+                    </div>
+                </div>
+                <script>
+                        $(document)
+                               .ready(function () {
+                                   $("#@(item.ReviewId + "DellYes")")
+                                       .click(function () {
+                                           var data = {
+                                               reviewId: ('@item.ReviewId')
+                                           };
+                                           $.ajax({
+                                               url: "/Admin/DeleteReviews",
+                                               type: "POST",
+                                               data: data,
+                                               success: function (data) {
+                                                   $("#divReviews").html(data);
+                                               }
+                                           });
+                                       });
+                               });
+                </script>
+               
+            </td>
+
+        </tr>
+    }
+
+</table>
+@if (!Model.Any())
+{
+    <h2 align="center" style="color: blue">На сайте, пока что нет отзывов.</h2>
+}

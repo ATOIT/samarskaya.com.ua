@@ -1,0 +1,171 @@
+﻿@model IEnumerable<Domain.Entityes.Order>
+
+@if (Model.Count().Equals(0))
+{
+    <h2 align="center">у вас нет заказов</h2>
+}
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success" align="center" style="color: red"><h3>@TempData["message"]</h3></div>
+}
+@if (!Model.Count().Equals(0))
+{
+
+    <table class="table table-bordered">
+        <tr >
+            <th >
+                <h4 align="center"><strong>Заказанные товары</strong></h4>
+            </th>
+            <th>
+                <h4 align="center"><strong>Данные по заказу</strong></h4>
+            </th>
+            <th>
+                <h4 align="center"><strong>Статус</strong></h4>
+            </th>
+            <th>
+                <h4 align="center"><strong>Действия</strong></h4>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @if (item.Products.Count.Equals(0))
+                    {
+                        <h4 align="center" style="color: red">Товары заказанные этим клиентом</h4>
+                        <h4 align="center" style="color: red">были удаленны Вами из базы.</h4>
+                    }
+                    @foreach (var a in item.Products)
+                    {
+                        <h4 align="center">"@a.Name"</h4>
+                        if (a.Category == "Partners")
+                        {
+                            <h5 align="center">(категория - Партнерское) </h5>
+                        }
+                        if (a.Category == "Selling")
+                        {
+                            <h5 align="center">(категория - Online - Гардироб) </h5>
+                        }
+                        foreach (var z in a.Photo)
+                        {
+                            if (z.Priority)
+                            {
+                                <div align="center"><img src="~/PhotoForDB/@z.PhotoUrl" height="80" width="70"/>
+                                </div>
+                            }
+                        }
+                        if (a.Discount != 0)
+                        {
+                            <p align="center">стоимость - <strong>@(a.Price - a.Price*a.Discount/100) грн</strong> (с учетом скидки <strong>@a.Discount %</strong> )
+                            </p>
+                        }
+                        else
+                        {
+                            <p align="center">стоимость - <strong>@(a.Price) грн</strong>
+                            </p>
+                        }
+                    }
+                </td>
+                <td>
+                 <p><strong>Дата заказа</strong> - @Html.DisplayFor(modelItem => item.DateOrder)</p> 
+                    <p><strong>Имя клиента</strong> - @Html.DisplayFor(modelItem => item.ClientName)</p>
+                    <p><strong>E-mail клиента</strong> - @Html.DisplayFor(modelItem => item.Email)</p> 
+                    <p><strong>Телефон клиента</strong> - @Html.DisplayFor(modelItem => item.Phone)</p> 
+                    <p><strong>Выбранная доставка</strong> - @Html.DisplayFor(modelItem => item.Delivery)</p> 
+                    <p><strong>Способ оплаты</strong> - @Html.DisplayFor(modelItem => item.Payment)</p>
+                    <p><strong>Адресс клиента</strong> - @Html.DisplayFor(modelItem => item.Address)</p>
+                    <p><strong>Комментарий клиента</strong> -@Html.DisplayFor(modelItem => item.Сomment)</p>
+                </td>
+                <td>
+                    @if (item.Status == "новый")
+                    {
+                        <h4 style="color: red">@item.Status</h4>
+                    }
+                    @if (item.Status == "выполненный")
+                    {
+                        <h4 style="color: green">@item.Status</h4>
+                    }
+                </td>
+                <td>
+                    <input id="@(item.OrderId + "Ok")" type="button" value="Выполненный" class="btn btn-default btn-xs" style="background-color: aquamarine;" />
+                    <br />
+                    <br />
+                    <input id="@(item.OrderId + "New")" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Новый&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default btn-xs" style="background-color:  aquamarine" />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <input id="@(item.OrderId + "Dell")" onClick="getElementById('@(item.OrderId + "DellModal")').removeAttribute('style');" type="button" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default btn-xs" style="background-color: bisque" />
+
+                    <div id="@(item.OrderId + "DellModal")" style="display:none;">
+                        <div class="overlayModal"></div>
+                        <div class="visibleModal">
+                            <h4 align="center">Заказ клиента - <strong>@item.ClientName</strong></h4>
+                                <br />
+                                <h4 align="center" style="color: red">Вы точно хотите удалить этот заказ?</h4>
+                                <input id="@(item.OrderId + "DellYes")" onClick="getElementById('@(item.OrderId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Да&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: left; background-color: aquamarine" />
+                                <input id="@(item.OrderId + "DellNo")" onClick="getElementById('@(item.OrderId + "DellModal")').style.display = 'none';" type="button" value="&nbsp;&nbsp;&nbsp;Нет&nbsp;&nbsp;&nbsp;&nbsp;" class="btn btn-default" style="margin: 50px; float: right; background-color: aquamarine" />
+                                <br />
+                        </div>
+                    </div>
+                    <script>
+                        $(document)
+                            .ready(function () {
+                                $("#@(item.OrderId + "Ok")")
+                                    .click(function () {
+                                        var data = {
+                                            orderId: ('@item.OrderId')
+                                        };
+                                        $.ajax({
+                                            url: "/Admin/OrderOk",
+                                            type: "POST",
+                                            data: data,
+                                            success: function (data) {
+                                                $("#divOrders").html(data);
+                                            }
+                                        });
+                                    });
+                            });
+                        $(document)
+                           .ready(function () {
+                               $("#@(item.OrderId + "New")")
+                                   .click(function () {
+                                       var data = {
+                                           orderId: ('@item.OrderId')
+                                       };
+                                       $.ajax({
+                                           url: "/Admin/OrderNew",
+                                           type: "POST",
+                                           data: data,
+                                           success: function (data) {
+                                               $("#divOrders").html(data);
+                                           }
+                                       });
+                                   });
+                           });
+                        $(document)
+                               .ready(function () {
+                                   $("#@(item.OrderId + "DellYes")")
+                                       .click(function () {
+                                           var data = {
+                                               orderId: ('@item.OrderId')
+                                           };
+                                           $.ajax({
+                                               url: "/Admin/OrderDelite",
+                                               type: "POST",
+                                               data: data,
+                                               success: function (data) {
+                                                   $("#divOrders").html(data);
+                                               }
+                                           });
+                                       });
+                               });
+                    </script>
+                </td>
+
+            </tr>
+        }
+    </table>
+}

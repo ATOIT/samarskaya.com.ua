@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /config.php/
+Disallow: /admin/
+Sitemap: http://osely.kiev.ua/sitemap.xml
+Host: https://freehost.com.ua/
