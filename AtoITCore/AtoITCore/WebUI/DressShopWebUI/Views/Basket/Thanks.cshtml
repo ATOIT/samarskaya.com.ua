@@ -1,11 +1,57 @@
 ﻿@{
     ViewBag.Title = "Thanks";
 }
+<!-------------------MENU---------------->
+<div class="row menu-top">
+    <div class="container-fuild menu">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/Home/Index"><span>О ДИЗАЙНЕРЕ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/Selling"><span>ONLINE-ГАРДЕРОБ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/Gallery"><span>ГАЛЕРЕЯ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/Partners"><span>ПАРТНЕРЫ</span></a>
+                    </li>
+                    <li>
+                        <a href="/Home/ClientFeedback"><span>ОТЗЫВЫ</span></a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>
+<!------------------/MENU--------------->
+<br />
+<br />
+<br />
+<br />
 <br />
 <br />
 
 @foreach (var i in ViewBag.Answer)
 {
-    <h2  align="center">@i</h2>
+    <h3  align="center">@i</h3>
 }
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <br />

@@ -12,6 +12,7 @@ namespace Domain.Concrete
     /// </summary>
     public class EmailSending : IEmailSending
     {
+        private static readonly DateTime Date = DateTime.Now;
         /// <summary>
         /// Отправка письма администратору
         /// </summary>
@@ -20,8 +21,8 @@ namespace Domain.Concrete
             try
             {
                 //c какой почты отправляем письмо 
-                MailMessage mail = new MailMessage { From = new MailAddress("test-samarskaya@test.com") };
-                mail.To.Add(new MailAddress("test-samarskaya-admin@test.com")); // E-mail Администратора
+                MailMessage mail = new MailMessage { From = new MailAddress("samarskaya.com.ua@gmail.com") };
+                mail.To.Add(new MailAddress("atoit.ua@gmail.com")); // E-mail Администратора
                 mail.Subject = "Новый заказ";
                 mail.Body = EmailMessageToAdministrator(basket, details);
                 if (!string.IsNullOrEmpty(attachFile))
@@ -32,7 +33,7 @@ namespace Domain.Concrete
                     Port = 587,
                     EnableSsl = true,
                     //c какой почты отправляем письмо + пароль от этой почты
-                    Credentials = new NetworkCredential("test-samarskaya@test.com".Split('@')[0], "123456789"),
+                    Credentials = new NetworkCredential("samarskaya.com.ua@gmail.com".Split('@')[0], "samarskaya123"),
                     DeliveryMethod = SmtpDeliveryMethod.Network
                 };
                 client.Send(mail);
@@ -51,7 +52,7 @@ namespace Domain.Concrete
             try
             {
                 //c какой почты отправляем письмо
-                MailMessage mail = new MailMessage { From = new MailAddress("test-samarskaya@test.com") };
+                MailMessage mail = new MailMessage { From = new MailAddress("samarskaya.com.ua@gmail.com") };
                 mail.To.Add(new MailAddress(details.Email)); //получаем E-mail который ввел пользователь
                 mail.Subject = "samarskaya.com"; // тема письма
                 mail.Body = EmailMessage(basket, details);
@@ -63,11 +64,12 @@ namespace Domain.Concrete
                     Port = 587,//Порт
                     EnableSsl = true,
                     //c какой почты отправляем письмо + пароль от этой почты
-                    Credentials = new NetworkCredential("test-samarskaya@test.com".Split('@')[0], "123456789"),
+                    Credentials = new NetworkCredential("samarskaya.com.ua@gmail.com".Split('@')[0], "samarskaya123"),
                     DeliveryMethod = SmtpDeliveryMethod.Network
                 };
                 client.Send(mail);
                 mail.Dispose();
+                basket.AnswerList.Clear();
                 basket.AnswerList.Add($"Уважаемый(ая), {details.ClientName}! ");
                 basket.AnswerList.Add("Благодарим Вас за покупку!");
                 basket.AnswerList.Add($"На Ваш E-mail ({details.Email}) высланы все детали заказа.");
@@ -91,7 +93,7 @@ namespace Domain.Concrete
             str.AppendLine("");
             str.AppendFormat($"Добрый день, {details.ClientName}!");
             str.AppendLine("");
-            str.AppendLine("Благодарим Вас за покупку на сайте - samarskaya.com !");
+            str.AppendLine("Благодарим Вас за покупку на сайте - samarskaya.somee.com !");
             str.AppendLine("");
             str.AppendLine("");
             str.AppendLine("Детали заказа:");
@@ -122,7 +124,7 @@ namespace Domain.Concrete
                 str.AppendLine("");
             }
             str.AppendLine("");
-            str.AppendFormat("Дата заказа -  {0:U}", details.DateOrder);
+            str.AppendFormat("Дата заказа -  {0:U}", Date);
             str.AppendLine("");
             str.AppendLine("Заказ отправлен в обработку, скоро мы с вами свяжемся, хорошего вам дня!");
 
@@ -136,7 +138,7 @@ namespace Domain.Concrete
             StringBuilder str = new StringBuilder();
             str.AppendLine("");
             str.AppendLine("Добрый день!");
-            str.AppendLine("Вам с сайта samarskaya.com поступил новый заказ!");
+            str.AppendLine("Вам с сайта samarskaya.somee.com поступил новый заказ!");
             str.AppendLine("");
             str.AppendLine("");
             str.AppendLine("Заказанные товары:");
@@ -174,7 +176,7 @@ namespace Domain.Concrete
             }
             str.AppendLine("");
             str.AppendLine("");
-            str.AppendFormat("Дата заказа -  {0:U}", details.DateOrder);
+            str.AppendFormat("Дата заказа -  {0:U}", Date);
             return str.ToString();
         }
 
