@@ -189,9 +189,11 @@ th{
     text-decoration: none; 
     color: black;
    } 
+
    /*------------------------ ошибки валидации -------------------------*/ 
 .field-validation-error {
     color: #ff0000;
+    font-size: 12px;
 }
 
 .field-validation-valid {
