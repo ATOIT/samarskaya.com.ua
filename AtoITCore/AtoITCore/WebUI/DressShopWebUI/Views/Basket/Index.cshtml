@@ -42,122 +42,104 @@
 
 <div class="container">
     <h3 align="center">@ViewBag.Sorry</h3>
-    <div class="row basket">
+    
         @foreach (var line in Model.Basket.Lines)
         {
-            foreach (var i in line.Photo)
-            {
+            <div class="row basket">
+                @foreach (var i in line.Photo)
+                {
+                if (i.Priority)
+                {
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 basket-images">
+                    <img class="basket-img" src="~/PhotoForDB/@i.PhotoUrl" alt="">
+                </div>
+                }
+                }
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 basket-opis">
+                    <h4 class="basket-name">"@line.Name"</h4>
+                    @if (line.Discount != 0)
+                {
+                        <p class="basket-price">
+                            @(line.Price - line.Price * line.Discount / 100) грн
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="basket-price">
+                            @line.Price.ToString("# грн")
+                        </p>
+                    }
 
-            }
-            }
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 basket-images">
-            <img class="basket-img" src="~/img/dress5.jpg" alt="">
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 basket-opis">
-            <h4 class="basket-name">Fghhhjsdf HJHhjg</h4>
-            <p class="basket-price">8oo</p>
-        </div>
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 basket-button">
-            <button type="button" class="btn btn-default">Удалить с корзины</button>
-        </div>
-    </div>
-
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 basket-button">
+                    @using (Html.BeginForm("RemoveFromBasket", "Basket"))
+                    {
+                        @Html.Hidden("productId", line.ProductId)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn btn-default" type="submit" value="Удалить из корзины" style="float: right" />
+                    }
+                </div>
+            </div>
+        }
     <div class="row itogo">
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 vsego">
-            <p><span>ВСЕГО:</span></p>
-        </div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <p><span>1250грн</span></p>
-        </div>
+        @if (Model.Basket.CountItem != 0)
+        {
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 vsego">
+                <p><span>ВСЕГО:</span></p>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <p><span>@Model.Basket.ComputeTotalValue().ToString("# грн")</span></p>
+            </div>
+           }
         <h4>Данные для оформления покупки</h4>
-        @*форма для оформления заказа*@
         @using (Html.BeginForm())
         {
-            @Html.EditorFor(x => x.Orders.ClientName, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 30px;", placeholder = "Имя" } })
+            @Html.EditorFor(x => x.Orders.ClientName, new {htmlAttributes = new {style = "margin: 0px; width: 500px; height: 30px;", placeholder = "Имя"}})
             @Html.ValidationMessageFor(x => x.Orders.ClientName)
-            <br />
-            <br />
-            @Html.EditorFor(x => x.Orders.Email, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 30px;", placeholder = "E-mail" } })
+            <br/>
+            <br/>
+            @Html.EditorFor(x => x.Orders.Email, new {htmlAttributes = new {style = "margin: 0px; width: 500px; height: 30px;", placeholder = "E-mail"}})
             @Html.ValidationMessageFor(x => x.Orders.Email)
-            <br />
-            <br />
-            @Html.EditorFor(x => x.Orders.Phone, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 30px;", placeholder = "Номер телефона" } })
+            <br/>
+            <br/>
+            @Html.EditorFor(x => x.Orders.Phone, new {htmlAttributes = new {style = "margin: 0px; width: 500px; height: 30px;", placeholder = "Номер телефона"}})
             @Html.ValidationMessageFor(x => x.Orders.Phone)
-            <br />
-            <br />
+            <br/>
+            <br/>
             <h4>Способ оплаты</h4>
-            <input id="Radio1" type="radio" value="наличными" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true" /><label style="margin: 5px">Наличными</label>
-            <br />
-            <input id="Radio2" type="radio" value="перевод на карту" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true" /><label style="margin: 5px">Перевод на карту</label>
-            <br />
-            <input id="Radio3" type="radio" value="SWIFT" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true" /><label style="margin: 5px">SWIFT</label>
+            <input id="Radio1" type="radio" value="наличными" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true"/><label style="margin: 5px">Наличными</label>
+            <br/>
+            <input id="Radio2" type="radio" value="перевод на карту" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true"/><label style="margin: 5px">Перевод на карту</label>
+            <br/>
+            <input id="Radio3" type="radio" value="SWIFT" name="Orders.Payment" data-val-required="Вы не выбрали способ оплаты" data-val="true"/><label style="margin: 5px">SWIFT</label>
             @Html.ValidationMessageFor(x => x.Orders.Payment)
-            <br />
-            <br />
+            <br/>
+            <br/>
             <h4>Способ достаки</h4>
-            <input id="Radio4" type="radio" value="cамовывоз" name="Orders.Delivery" data-val-required="Вы не выбрали способ доставки" data-val="true" /><label style="margin: 5px">Самовывоз</label>
-            <br />
-            <input id="Radio5" type="radio" value="почта" name="Orders.Delivery" data-val-required="Вы не выбрали способ доставки" data-val="true" /><label style="margin: 5px">Почта</label>
+            <input id="Radio4" type="radio" value="cамовывоз" name="Orders.Delivery" data-val-required="Вы не выбрали способ доставки" data-val="true"/><label style="margin: 5px">Самовывоз</label>
+            <br/>
+            <input id="Radio5" type="radio" value="почта" name="Orders.Delivery" data-val-required="Вы не выбрали способ доставки" data-val="true"/><label style="margin: 5px">Почта</label>
             @Html.ValidationMessageFor(x => x.Orders.Delivery)
-            <br />
-            <br />
-            @Html.EditorFor(x => x.Orders.Address, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 80px;", placeholder = "Адрес" } })
+            <br/>
+            <br/>
+            @Html.EditorFor(x => x.Orders.Address, new {htmlAttributes = new {style = "margin: 0px; width: 500px; height: 80px;", placeholder = "Адрес"}})
             @Html.ValidationMessageFor(x => x.Orders.Address)
-            <br />
-            <br />
-            @Html.EditorFor(x => x.Orders.Сomment, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 80px;", placeholder = "Комментарий" } })
+            <br/>
+            <br/>
+            @Html.EditorFor(x => x.Orders.Сomment, new {htmlAttributes = new {style = "margin: 0px; width: 500px; height: 80px;", placeholder = "Комментарий"}})
             @Html.ValidationMessageFor(x => x.Orders.Сomment)
-            <br />
+            <br/>
             <div>
-                <input class="btn btn-primary" type="submit" value="Оформить заказ" />
+                <input class="btn btn-primary" type="submit" value="Оформить заказ"/>
                 <a href="@Model.ReturnUrl">
-                    <input id="Button1" class="btn btn-primary" type="button" value="Продолжить покупку" style="float: right" />
+                    <input id="Button1" class="btn btn-primary" type="button" value="Продолжить покупку" style="float: right"/>
                 </a>
             </div>
         }
-
     </div>
 </div>
 
 
-@foreach (var line in Model.Basket.Lines)
-{
-    foreach (var i in line.Photo)
-    {
-        if (i.Priority)
-        {
-            //получаем фото продукта
-            <img title="@line.Name" src="~/PhotoForDB/@i.PhotoUrl" height="80" width="75" />
-        }
-    }
 
-    if (line.Discount != 0)
-    {
-        <p>
-            <strong>Цена -</strong> @(line.Price - line.Price * line.Discount / 100) грн
-        </p>
-    }
-    else
-    {
-        <p>
-            <strong>Цена -</strong> @line.Price.ToString("# грн")
-        </p>
-    }
-    <p>Платье  "@line.Name"</p>
 
-    //кнопка удаления продукта из корзины
-    using (Html.BeginForm("RemoveFromBasket", "Basket"))
-    {
-        @Html.Hidden("productId", line.ProductId)
-        @Html.HiddenFor(x => x.ReturnUrl)
-        <input class="btn" type="submit" value="Удалить из корзины" style="float: right" />
-    }
-
-}
-
-@*суммарная стоимость покупки*@
-@if (Model.Basket.CountItem != 0)
-{
-    <h3>Итого: @Model.Basket.ComputeTotalValue().ToString("# грн")</h3>
-}
 
