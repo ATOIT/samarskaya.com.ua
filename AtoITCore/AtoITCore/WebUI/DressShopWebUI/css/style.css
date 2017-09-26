@@ -104,6 +104,32 @@ html {
 .price {
     text-align: center;
 }
+.basket-images{
+    text-align: center;
+    padding: 5px;
+}
+.basket-img{
+    max-height: 120px;
+    margin: 5px;
+}
+.basket-opis {
+    margin-top: 3%;
+ }
+.basket-button {
+    margin-top: 4%;
+ }
+.basket{
+    border: 1px solid #8dbf8f;
+    margin-top: 5px;
+    box-shadow:0px 0px 5px 0px rgba(50, 50, 50, 0.58);}
+.itogo{
+    color: #446D45;
+    font-weight: 600;
+    font-size: 24px;
+} 
+.vsego{
+    text-align: right;
+}
 
 /*-----------------/content online-gardirob----------------*/
 /*-----------------content galerey----------------*/
