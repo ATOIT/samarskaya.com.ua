@@ -113,7 +113,7 @@
         #reviewStars-input #star-5 {
             left: 165px;
         }
-    /*----------------------------------------Ошибки валидации-------------------------------------*/
+    /*----------------------------------------Ошибки валидации--------------------------------------*/
     /*.field-validation-error {
         color: #ff0000;
     }
@@ -137,7 +137,51 @@
     }*/
     /*----------------------------------------------------------------------------------*/
 </style>
+<div class="container otzyv">
+    <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <p class="otzyv-name">Petrov Ivan Ivanovich</p> 
+            <p class="otzyv-data">20.09.2017</p>
+            <p class="otzyv-zirka"><img src="img/zirkap.png" alt=""></p>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <img src="img/verchkoma.png" alt="">
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <p>djfghdfkhgkj fdsgfjsdgf fegjsdgjfgsd fsdjgfjksdgfj fgdsjkgfjkdsg fjsdgfjkdsgfjkgjk gfdsjgjg ffsdfds</p>
+        <div class="row">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    <img src="img/plus.png" alt="">
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <p>dfsjjkfdsg</p>
+            </div>
+        </div>
+        <div class="row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        <img src="img/minus.png" alt="">
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <p>dfsjjkfdsg</p>
+                </div>   
+        </div>
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            <img src="img/nizkoma.png" alt=""> 
+    </div>
+    </div>
+    <div class="row forma">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <p><b>ОСТАВИТЬ ОТЗЫВ</b></p>
+        </div>
+       <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
 
+            <button type="button" class="btn btn-primary" data-dismiss="modal">ОТПРАВИТЬ</button>
+       </div>
+    </div>
+    </div>
 <div class="container">
     <div class="row">
         @if (TempData["messageOk"] != null)

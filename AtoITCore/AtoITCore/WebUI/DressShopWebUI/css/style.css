@@ -34,6 +34,18 @@ html {
     padding-left: 25px;
     width: 50;
 }
+.bask-icon{
+    margin:5px 0 0 162px;
+    }
+.otzyv img{
+    max-height:20px;
+}
+.forma{
+    margin-top: 20px;
+}
+.forma p{
+    text-align: center;
+}
 /*-------------------/header------------*/
 /*------------------menu----------------*/
 .menu-top{
@@ -138,6 +150,7 @@ html {
     right:50px;
     text-align: center;
     }
+
 
 /*-----------------/content online-gardirob----------------*/
 /*-----------------content galerey----------------*/
