@@ -1,5 +1,6 @@
 ﻿@using Domain.Entityes
-@model  IEnumerable<Reviews>
+@using DressShopWebUI.Models
+@model PageModel
 @{
     ViewBag.Title = "Отзывы";
 }
@@ -151,7 +152,7 @@
             <br />
             <br />
         }
-        @foreach (var item in Model)
+        @foreach (var item in Model.Reviewses)
         { <div>
 
         <h4>
@@ -215,6 +216,9 @@
     <br />
         <br />
         }
+        <div class="btn-group" style="align-content: center">
+             @Html.PageLinks(Model.PageInfo, x => Url.Action("ClientFeedback", new { page = x }))
+        </div>
         @Html.Partial("NewFeedback", new Reviews())
     </div>
 </div>

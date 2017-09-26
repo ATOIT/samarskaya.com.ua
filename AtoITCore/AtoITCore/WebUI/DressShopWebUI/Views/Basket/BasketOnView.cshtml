@@ -1,12 +1,13 @@
 ﻿@model Domain.Entityes.Basket
-<div align="right" >
-<a href="@Url.Action("Index", new {returnUrl = Request.Url?.PathAndQuery})" class="basketLink">
-    @{
-        if (Model.CountItem != 0)
-        {
-            <p align="right" style="padding: 12px;">@Model.CountItem</p>
+        @{
+            if (Model.CountItem != 0)
+            {
+                <div id='follow'>
+                    <p class="bask"><b>@Model.CountItem</b></p>
+                    <a href='@Url.Action("Index", new {returnUrl = Request.Url?.PathAndQuery})' target='_blank'>
+                        <img src='~/img/basketpic.png' alt='' title='' />
+                    </a>
+                </div>
+            }
         }
-    }
-    <img src="~/img/basketpic.png" alt="" class="">
-</a>
-</div>
+

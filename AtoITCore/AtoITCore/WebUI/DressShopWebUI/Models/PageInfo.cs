@@ -20,56 +20,56 @@ namespace DressShopWebUI.Models
     /// </summary>
     public class PageModel
     {
-        public IEnumerable<Photo> Photo { get; set; }
+        public IEnumerable<Reviews> Reviewses { get; set; }
         public PageInfo PageInfo { get; set; }
 
-       // return View(GetModel(selling.ToList(), size, page)); - вывод данных в модель, используя пейджинг.
-        /// <summary>
-        /// Вспомагательный метод, для пейджинга
-        /// </summary>
-        /// <param name="mas"> массив данных из БД</param>
-        /// <param name="size">количество обьектов на страницу</param>
-        /// <param name="page">текущая страница</param>
-        /// <returns></returns>
-        private PageModel GetModel(IList<Photo> mas, int size, int page)
-        {
-            int pageSize = CountItem(mas, size); //расчитываем исходя из продуктов а не из фото
-            IEnumerable<Photo> sell = mas.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = mas.Count() };
-            return new PageModel { PageInfo = pageInfo, Photo = sell };
-        }
+       //// return View(GetModel(selling.ToList(), size, page)); - вывод данных в модель, используя пейджинг.
+       // /// <summary>
+       // /// Вспомагательный метод, для пейджинга
+       // /// </summary>
+       // /// <param name="mas"> массив данных из БД</param>
+       // /// <param name="size">количество обьектов на страницу</param>
+       // /// <param name="page">текущая страница</param>
+       // /// <returns></returns>
+       // private PageModel GetModel(IList<Reviews> mas, int size, int page)
+       // {
+       //     int pageSize = CountItem(mas, size); //расчитываем исходя из продуктов а не из фото
+       //     IEnumerable<Reviews> sell = mas.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+       //     PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = mas.Count() };
+       //     return new PageModel { PageInfo = pageInfo, Reviewses = sell };
+       // }
 
-        /// <summary>
-        /// Вспомогательный метод, для расщета количества элементов на странице по константе
-        /// </summary>
-        /// <param name="mas">Массив фотографий</param>
-        /// <param name="pageSize"> Количество продуктов на странице</param>
-        /// <returns></returns>
-        private int CountItem(IList<Photo> mas, int pageSize)
-        {
-            int count = 0;
-            int countProduct = 0;
-            int id = 0;
-            foreach (var i in mas)
-            {
+       // /// <summary>
+       // /// Вспомогательный метод, для расщета количества элементов на странице по константе
+       // /// </summary>
+       // /// <param name="mas">Массив фотографий</param>
+       // /// <param name="pageSize"> Количество продуктов на странице</param>
+       // /// <returns></returns>
+       // private int CountItem(IList<Reviews> mas, int pageSize)
+       // {
+       //     int count = 0;
+       //     int countProduct = 0;
+       //     int id = 0;
+       //     foreach (var i in mas)
+       //     {
 
-                if (id.Equals(0) || id.Equals(i.Product.ProductId))
-                {
-                    id = i.Product.ProductId;
-                    count++;
-                }
-                else
-                {
-                    if (countProduct == pageSize - 1)
-                        break;
-                    countProduct++;
-                    count++;
-                    id = i.Product.ProductId;
+       //         if (id.Equals(0) || id.Equals(i.ReviewId))
+       //         {
+       //             id = i.ReviewId;
+       //             count++;
+       //         }
+       //         else
+       //         {
+       //             if (countProduct == pageSize - 1)
+       //                 break;
+       //             countProduct++;
+       //             count++;
+       //             id = i.ReviewId;
 
-                }
-            }
-            return count;
-        }
+       //         }
+       //     }
+       //     return count;
+       // }
     }
 
 

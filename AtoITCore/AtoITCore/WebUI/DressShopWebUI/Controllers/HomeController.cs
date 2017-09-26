@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Domain.Abstrac;
 using Domain.Entityes;
+using DressShopWebUI.Models;
 
 
 namespace DressShopWebUI.Controllers
@@ -60,9 +62,14 @@ namespace DressShopWebUI.Controllers
 
         #region Отзывы
 
-        public ViewResult ClientFeedback() //стартовая страница Отзывы
+        public ViewResult ClientFeedback(int page = 1) //стартовая страница Отзывы
         {
-            return View(_reviewsRepository.Reviewses.OrderByDescending(x => x.DateFeedback));
+            int pageSize = 5;
+            List<Reviews> rew = _reviewsRepository.Reviewses.OrderByDescending(x => x.DateFeedback).ToList();
+            rew = rew.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = _reviewsRepository.Reviewses.Count() };
+            PageModel ivm = new PageModel { PageInfo = pageInfo, Reviewses = rew };
+            return View(ivm);
         }
 
         [HttpPost]

@@ -23,7 +23,7 @@ namespace DressShopWebUI.Models
             tagFirst.MergeAttribute("href", pageUrl(1));
             tagFirst.MergeAttribute("title", "в начало");
             tagFirst.InnerHtml = "&laquo";
-            tagFirst.AddCssClass("pagination");
+            tagFirst.AddCssClass("btn btn-default");
             result.Append(tagFirst);
             int count = 0;
            
@@ -38,9 +38,10 @@ namespace DressShopWebUI.Models
                     tag.InnerHtml = i.ToString();
                     if (i == pageInfo.PageNumber)
                     {
-                        tag.AddCssClass("active");
+                        tag.AddCssClass("selected");
+                        tag.AddCssClass("btn-primary");
                     }
-                    tag.AddCssClass("pagination");
+                    tag.AddCssClass("btn btn-default");
                     result.Append(tag);
                 }
                 
@@ -49,7 +50,7 @@ namespace DressShopWebUI.Models
             tagLast.MergeAttribute("href", pageUrl(pageInfo.TotalPages));
             tagLast.MergeAttribute("title", "в конец");
             tagLast.InnerHtml = "&raquo;";
-            tagLast.AddCssClass("pagination");
+            tagLast.AddCssClass("btn btn-default");
             result.Append(tagLast);
             
             return MvcHtmlString.Create(result.ToString());
