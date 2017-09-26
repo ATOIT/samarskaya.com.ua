@@ -130,6 +130,14 @@ html {
 .vsego{
     text-align: right;
 }
+#follow {
+    margin: 0px;
+    z-index: 100;
+    position: fixed;
+    top: 550px;
+    right:50px;
+    text-align: center;
+    }
 
 /*-----------------/content online-gardirob----------------*/
 /*-----------------content galerey----------------*/
