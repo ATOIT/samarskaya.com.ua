@@ -4,9 +4,6 @@ using Domain.Entityes;
 
 namespace Domain.Abstrac
 {
-    /// <summary>
-    /// Интерфейс возвращающий коллекцию товаров из БД
-    /// </summary>
     public interface IProductRepository
     {
         IEnumerable<Product> Products { get; }

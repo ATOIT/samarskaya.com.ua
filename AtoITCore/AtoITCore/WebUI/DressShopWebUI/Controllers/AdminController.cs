@@ -11,9 +11,7 @@ using Domain.Entityes;
 
 namespace DressShopWebUI.Controllers
 {
-    /// <summary>
-    /// Контроллер для админ - панели
-    /// </summary>
+
     [Authorize]
     public class AdminController : Controller
     {
@@ -38,13 +36,11 @@ namespace DressShopWebUI.Controllers
         }
 
         [HttpPost]
-        //Сортировка и поиск по имени продукта
         public ActionResult MyPanel(string searchName, CategoryProduct category)
         {
             var product = _productRepository.Products;
             if (!string.IsNullOrEmpty(searchName))
             {
-                //поиск в коллекции продуктов продукта по имени
                 var enumerable = product as IList<Product> ?? product.ToList();
                 var qvery = enumerable.Where(s => s.Name.Equals(searchName)).ToList();
                 if (qvery.Count != 0)
@@ -52,7 +48,6 @@ namespace DressShopWebUI.Controllers
                     TempData["message"] = $"Выбран товар по имени - \"{searchName}\"";
                     return PartialView("PartialMyPanel", qvery);
                 }
-                //если ничего не найденно 
                 TempData["message"] = $"Товара с именем - \"{searchName}\" не существует!";
                 return PartialView("PartialMyPanel", enumerable);
             }
@@ -94,7 +89,6 @@ namespace DressShopWebUI.Controllers
                 var extension = Path.GetExtension(upload.FileName);
                 photoName += extension;
                 List<string> extensions = new List<string> { ".jpg", ".png", ".gif" };
-                // сохраняем файл
                 if (extensions.Contains(extension))
                 {
                     upload.SaveAs(Server.MapPath("~/PhotoForDB/" + photoName));
@@ -113,7 +107,6 @@ namespace DressShopWebUI.Controllers
                         photoName = Guid.NewGuid().ToString();
                         extension = Path.GetExtension(file.FileName);
                         photoName += extension;
-                        // сохраняем файл в папку Files в проекте
                         if (extensions.Contains(extension))
                         {
                             file.SaveAs(Server.MapPath("~/PhotoForDB/" + photoName));
@@ -128,13 +121,11 @@ namespace DressShopWebUI.Controllers
                 }
                 try
                 {
-                    //сохраняем новый товар
                     _productRepository.SaveProduct(product, list);
                     TempData["message"] = "Товар успешно добавлен!";
                 }
                 catch (Exception)
                 {
-                    //при ошибке, удаляем файлы из директории
                     DirectoryInfo directory = new DirectoryInfo(Server.MapPath("~/PhotoForDB/"));
                     foreach (FileInfo file in directory.GetFiles())
                     {
@@ -212,7 +203,7 @@ namespace DressShopWebUI.Controllers
 
         //------------------------------------------------Редактот фото товара----------------------------------------------------------------
         [HttpPost]
-        public ActionResult PriorityСhangesPhoto(int idProduct, int id) // Изменение приоритета фото
+        public ActionResult PriorityСhangesPhoto(int idProduct, int id)
         {
             try
             {
@@ -285,7 +276,6 @@ namespace DressShopWebUI.Controllers
         [HttpGet]
         public ActionResult EditingReviews()
         {
-            //выбираем все отзывы
             return View(_reviewsRepository.Reviewses.
                         OrderByDescending(x => x.DateFeedback));
         }
@@ -293,7 +283,6 @@ namespace DressShopWebUI.Controllers
         [HttpPost]
         public ActionResult EditingReviews(SortType sortType)
         {
-            //сортируем отзывы
             var reviews = _reviewsRepository.Reviewses;
             switch (sortType)
             {
@@ -316,7 +305,6 @@ namespace DressShopWebUI.Controllers
         [HttpGet]
         public ActionResult EditReview(int reviewId)
         {
-            //выбираем отзыв для редактирования
             var review = _reviewsRepository.Reviewses.FirstOrDefault(x => x.ReviewId == reviewId);
             return View(review);
         }
@@ -328,7 +316,6 @@ namespace DressShopWebUI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //пробуем отредактировать отзыв
                     _reviewsRepository.SaveReview(review);
                     TempData["message"] = "Изменения в отзыве были сохранены";
                     return RedirectToAction("EditingReviews");
@@ -353,14 +340,12 @@ namespace DressShopWebUI.Controllers
             try
             {
                 var review = _reviewsRepository.Reviewses.FirstOrDefault(x => x.ReviewId == reviewId);
-                //пробуем удалить отзыв
                 _reviewsRepository.RemoveReview(review);
                 return PartialView("PartialEditingReviews",
                     _reviewsRepository.Reviewses.OrderByDescending(x => x.DateFeedback));
             }
             catch (Exception)
             {
-                //ошибка в базе и т.д.
                 TempData["message"] = "Ошибка! Мы не смогли удалить отзыв :( ";
                 return PartialView("PartialEditingReviews",
                     _reviewsRepository.Reviewses.OrderByDescending(x => x.DateFeedback));
@@ -370,7 +355,6 @@ namespace DressShopWebUI.Controllers
         #endregion
 
         #region заказы
-        //стартовая страница
         public ActionResult OrdeResult()
         {
             return View(_orderRepository.Orders.OrderByDescending(x => x.DateOrder));

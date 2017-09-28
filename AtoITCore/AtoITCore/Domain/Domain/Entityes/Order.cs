@@ -5,11 +5,6 @@ namespace Domain.Entityes
 {
     public class Order : OrderDetails
     {
-        //public Order()
-        //{
-        //    Products = new List<Product>();
-        //}
-        
         [Key]
         [ScaffoldColumn(false)]
         public int OrderId { get; set; }

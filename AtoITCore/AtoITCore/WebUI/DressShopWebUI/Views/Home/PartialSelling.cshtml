@@ -37,7 +37,6 @@
         </div>
     </figure>
 </div>
-<!------------------MODAL--------------->
 <div id="@("myModal"+Model.ProductId)" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -60,7 +59,6 @@
                                             <img src="~/PhotoForDB/@i.PhotoUrl">
                                         </div>
                                     }
-                                    
                                 }
                                 @if (Model.Discount != 0)
                                 {
@@ -89,7 +87,6 @@
                                         </div>
                                         count = 0;
                                         <div class="item" >
-                                       
                                             @foreach (var i in Model.Photo)
                                             {
                                                 if (count <= 3)
@@ -102,7 +99,6 @@
                                                 </div>
                                                 count++;
                                             }
-                                       
                                         </div>
                                     }
                                 </div>
@@ -115,7 +111,6 @@
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                     </a>
                                 }
-                               
                             </div> 
                         </div>
                     </div> 
@@ -161,8 +156,5 @@
                    }
             </div>
         </div>
-
     </div>
 </div>
-<!------------------/MODAL---------------->
-

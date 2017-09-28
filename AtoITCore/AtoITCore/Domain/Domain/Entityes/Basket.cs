@@ -74,7 +74,5 @@ namespace Domain.Entityes
         {
             _myCollection.Clear();
         }
-
-
     }
 }

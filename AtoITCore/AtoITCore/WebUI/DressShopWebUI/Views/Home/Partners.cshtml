@@ -2,8 +2,7 @@
 @{
     ViewBag.Title = "Партнеры";
 }
-   <!-------------------MENU---------------->
-<div class="row menu-top">
+  <div class="row menu-top">
     <div class="container-fuild menu">
         <nav class="navbar navbar-default" role="navigation">
             <div class="navbar-header">
@@ -32,15 +31,12 @@
                         <a href="/Home/ClientFeedback"><span>ОТЗЫВЫ</span></a>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
     </div>
 </div>
-<!------------------/MENU---------------->
-
-<!------------------SLIDER---------------->
 @Html.Action("Slider", "Home")
-<!------------------/SLIDER---------------->
+<br />
 <div class="container">
     <div class="row">
         @foreach (var i in Model)
@@ -49,5 +45,4 @@
         }
     </div>
 </div>
-@*метод формирующий представление для плавающей корзины*@
 @Html.Action("BasketOnView", "Basket")

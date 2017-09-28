@@ -114,7 +114,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\animate.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\owl.carousel.css" />
     <Content Include="css\owl.theme.default.css" />
@@ -122,38 +121,27 @@
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\basketpic.png" />
     <Content Include="img\cush.png" />
-    <Content Include="img\dress1.jpg" />
-    <Content Include="img\dress10.jpg" />
-    <Content Include="img\dress2.jpg" />
-    <Content Include="img\dress3.jpg" />
-    <Content Include="img\dress4.jpg" />
-    <Content Include="img\dress5.jpg" />
-    <Content Include="img\dress6.jpg" />
-    <Content Include="img\dress7.jpg" />
-    <Content Include="img\dress8.jpg" />
-    <Content Include="img\dress9.jpg" />
     <Content Include="img\fb.png" />
     <Content Include="img\headermasterpic.png" />
     <Content Include="img\headerpattern.png" />
     <Content Include="img\insta.png" />
     <Content Include="img\knopka.gif" />
     <Content Include="img\logo.png" />
+    <Content Include="img\minus.png" />
+    <Content Include="img\nizkoma.png" />
     <Content Include="img\patern.png" />
+    <Content Include="img\plus.png" />
     <Content Include="img\shoplogo.png" />
-    <Content Include="img\sliderimg.jpg" />
-    <Content Include="img\star.png" />
     <Content Include="img\stars.png" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="js\bootstrap.js" />
-    <Content Include="js\jquery-1.10.2.js" />
-    <Content Include="js\js.js" />
-    <Content Include="js\owl.carousel.js" />
+    <Content Include="img\verchkoma.png" />
+    <Content Include="img\zirka.png" />
+    <Content Include="img\zirkap.png" />
     <Content Include="PhotoForDB\dress1.jpg" />
     <Content Include="PhotoForDB\dress10.jpg" />
     <Content Include="PhotoForDB\dress2.jpg" />

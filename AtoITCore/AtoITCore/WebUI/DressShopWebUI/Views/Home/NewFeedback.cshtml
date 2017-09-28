@@ -2,8 +2,6 @@
 
 @using (Html.BeginForm("Feedback", "Home", FormMethod.Post))
 {
-    <h3>Оставить отзыв</h3>
-    <br />
     <br />
     @Html.EditorFor(x => x.ClientName, new { htmlAttributes = new { style = "margin: 0px; width: 500px; height: 20px;", placeholder = "Введите ваше имя" } })
     @Html.ValidationMessageFor(x => x.ClientName)
@@ -43,7 +41,8 @@
     @Html.ValidationMessageFor(x => x.LackOf)
     <br />
     <br />
-    <button id="form" class="btn btn-primary" type="submit">Отправить отзыв</button>
-
-
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+        <button id="form" class="btn btn-primary" type="submit" data-dismiss="modal">Отправить отзыв</button>
+    </div>
+    
 }

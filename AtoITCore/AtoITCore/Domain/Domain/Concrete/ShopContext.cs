@@ -6,9 +6,6 @@ namespace Domain.Concrete
     {
         public Context() : base("DefaultConnection") { }
     }
-    /// <summary>
-    /// Контекст для БД
-    /// </summary>
     public class ShopContext : Context
     {
         public virtual DbSet<Product> Product { get; set; }

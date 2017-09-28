@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Спасибо за покупку!";
 }
-<!-------------------MENU---------------->
 <div class="row menu-top">
     <div class="container-fuild menu">
         <nav class="navbar navbar-default" role="navigation">
@@ -32,15 +31,13 @@
                         <a href="/Home/ClientFeedback"><span>ОТЗЫВЫ</span></a>
                     </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </nav>
     </div>
 </div>
-<!------------------/MENU--------------->
 <br />
 <br />
 <br />
-
 @foreach (var i in ViewBag.Answer)
 {
     <h4  align="center">@i</h4>

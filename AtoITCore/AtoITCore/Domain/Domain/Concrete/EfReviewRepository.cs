@@ -15,9 +15,7 @@ namespace Domain.Concrete
         {
             if (reviews.ReviewId == 0)
             {
-                //проверяем наличие рейтинга заполненого пользователем.
                 var rating = string.IsNullOrEmpty(reviews.Rating.ToString()) ? 0 : int.Parse(reviews.Rating.ToString());
-                //Добавляем отзыв
                 _context.Reviews.Add(new Reviews
                 {
                     ClientName = reviews.ClientName,

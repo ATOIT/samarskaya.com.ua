@@ -13,7 +13,6 @@ namespace Domain.Concrete
         readonly ShopContext _context = new ShopContext();
         public IEnumerable<Product> Products => _context.Product;
 
-        //Добавление и редактирование продукта
         public void SaveProduct(Product product, List<Photo> list)
         {
             if (product.ProductId == 0)
@@ -56,7 +55,6 @@ namespace Domain.Concrete
             }
         }
 
-        //Удаление продукта
         public void RemoveProduct(int productId, DirectoryInfo directory)
         {
             List<string> urList = new List<string>();
@@ -72,7 +70,7 @@ namespace Domain.Concrete
                 _context.Product.Remove(pro);
                 _context.SaveChanges();
 
-                foreach (FileInfo file in directory.GetFiles()) //Удаление фото из директории пока закоментирую для удобства 
+                foreach (FileInfo file in directory.GetFiles()) 
                 {
                     if (urList.Contains(file.ToString()))
                         file.Delete();
@@ -82,7 +80,6 @@ namespace Domain.Concrete
                 throw new Exception();
         }
 
-        //Добавление фото к продукту
         public void SavePhoto(int productId, string url)
         {
             var oneProduct = _context.Product.FirstOrDefault(x=>x.ProductId== productId);
@@ -118,7 +115,6 @@ namespace Domain.Concrete
                 throw new Exception();
         }
 
-        //Удаление фото
         public void RemovePhoto(int productId, int photoId, DirectoryInfo directory)
         {
             var oneProduct = _context.Product.FirstOrDefault(x=>x.ProductId == productId);
@@ -130,12 +126,12 @@ namespace Domain.Concrete
                     var urlDell = onePhoto.PhotoUrl; 
                     _context.Photo.Remove(onePhoto);
                     _context.SaveChanges();
-                    foreach (FileInfo file in directory.GetFiles()) //Пока закоментирую, для удобства
+                    foreach (FileInfo file in directory.GetFiles()) 
                     {
                         if (file.ToString() == urlDell)
                             file.Delete();
                     }
-                    if (oneProduct.Photo.Any()) //Проверяем, остались ли фото в базе по продукту
+                    if (oneProduct.Photo.Any()) 
                     {
                         if (oneProduct.Photo.FirstOrDefault(x => x.Priority) == null)
                         {
@@ -154,7 +150,6 @@ namespace Domain.Concrete
                 throw new Exception();
         }
 
-        //Смена приоритета фото
         public void PriorityСhangesPhoto(int productId, int photoId)
         {
                 try

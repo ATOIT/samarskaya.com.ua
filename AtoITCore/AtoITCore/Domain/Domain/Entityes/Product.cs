@@ -10,12 +10,6 @@ namespace Domain.Entityes
     /// </summary>
     public class Product
     {
-        //public Product()
-        //{
-        //    Order = new List<Order>();
-        //    Photo = new List<Photo>();
-        //}
-
         [Key]
         [ScaffoldColumn(false)]
         public int ProductId { get; set; }
