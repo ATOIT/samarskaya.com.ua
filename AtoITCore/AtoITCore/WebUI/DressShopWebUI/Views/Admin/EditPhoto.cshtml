@@ -1,6 +1,6 @@
-﻿@model ICollection<Domain.Entityes.Photo>
+﻿@model Domain.Entityes.Product
 
-@if (!Model.Count.Equals(0))
+@if (!Model.Photo.Count.Equals(0))
 {
    <h3 align="center" style="color:  red">@ViewBag.Error</h3>
     <table class="table table-bordered">
@@ -19,7 +19,7 @@
             </th>
         </tr>
 
-        @foreach (var i in Model)
+        @foreach (var i in Model.Photo)
         {
             <tr>
                 <td>
@@ -53,7 +53,7 @@
                                         if (prior === "True")
                                             return false;
                                         var data = {
-                                            idProduct: ('@i.Product.ProductId'),
+                                            idProduct: ('@Model.ProductId'),
                                             id: ('@i.PhotoId')
                                         };
                                         $.ajax({
@@ -81,7 +81,7 @@
                                 $("#@(i.PhotoId+ "ButtonDelete")")
                                     .click(function () {
                                         var data = {
-                                            idProduct: ('@i.Product.ProductId'),
+                                            idProduct: ('@Model.ProductId'),
                                             id: ('@i.PhotoId')
                                         };
                                         $.ajax({
@@ -99,8 +99,10 @@
             </tr>
         }
     </table>
+
+}
     <div>
-        @if (Model.Count < 8)
+        @if (Model.Photo.Count < 8)
         {
             <form id="fileUpload" action="@Url.Action("UploadPhoto")" method="POST" enctype="multipart/form-data">
                 <table>
@@ -122,7 +124,7 @@
                                 $("#btnFileUpload")
                                     .click(function () {
                                         var formData = new FormData();
-                                        formData.append("productId", '@Model.First().Product.ProductId');
+                                        formData.append("productId", '@Model.ProductId');
                                         //  debugger;
                                         var file = document.getElementById("fileInput").files[0];
                                         if (file == null)
@@ -145,5 +147,4 @@
 
                     </script>
 
-}
 

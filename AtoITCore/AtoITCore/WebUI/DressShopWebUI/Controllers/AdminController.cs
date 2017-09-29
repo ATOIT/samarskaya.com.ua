@@ -215,8 +215,8 @@ namespace DressShopWebUI.Controllers
             }
             var product = _productRepository.Products.FirstOrDefault(x => x.ProductId == idProduct);
             if (product != null)
-                return PartialView("EditPhoto", product.Photo.ToList());
-            return PartialView("EditPhoto", new List<Photo>());
+                return PartialView("EditPhoto", product);
+            return PartialView("EditPhoto", new Product());
         }
 
 
@@ -234,8 +234,8 @@ namespace DressShopWebUI.Controllers
             }
             var product = _productRepository.Products.FirstOrDefault(x => x.ProductId == idProduct);
             if (product != null)
-                return PartialView("EditPhoto", product.Photo.ToList());
-            return PartialView("EditPhoto", new List<Photo>());
+                return PartialView("EditPhoto", product);
+            return PartialView("EditPhoto", new Product());
         }
         //------------------------------------------------------------------------------------------------------------------------------------
         //------------------------------------------------Добавление фото на сервер-----------------------------------------------------------
@@ -258,12 +258,12 @@ namespace DressShopWebUI.Controllers
             {
                 ModelState.AddModelError("", "Ошибка! Не верное расширение фотографии!");
                 if (product != null)
-                    PartialView("EditPhoto", product.Photo.ToList());
-                return PartialView("EditPhoto", new List<Photo>());
+                    PartialView("EditPhoto", product);
+                return PartialView("EditPhoto", new Product());
             }
             if (product != null)
-                return PartialView("EditPhoto", product.Photo.ToList());
-            return PartialView("EditPhoto", new List<Photo>());
+                return PartialView("EditPhoto", product);
+            return PartialView("EditPhoto", new Product());
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------
